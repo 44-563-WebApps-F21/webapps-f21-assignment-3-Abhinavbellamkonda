@@ -58,6 +58,43 @@ The exquisite marble structure in Agra, India, is a mausoleum, an enduring monum
             <td>100 Rs</td>
           </tr>
       </table>
-  
+
+      <hr>
+      <h4>Displays Algoritham<h4>
+           <blockquote>In graph theory, a bipartite graph is a special kind of graph that consists of two vertex sets.
+               we’ll discuss a general definition. We’ll also present an algorithm to determine whether a given graph is bipartite or no.
+          </blockquote>
+          <a href="https://cp-algorithms.com/graph/bipartite-check.html" target="blank">Link to source</a>
+
+          <pre>
+            int n;
+            vector<vector<int>> adj;
+            
+            vector<int> side(n, -1);
+            bool is_bipartite = true;
+            queue<int> q;
+            for (int st = 0; st < n; ++st) {
+                if (side[st] == -1) {
+                    q.push(st);
+                    side[st] = 0;
+                    while (!q.empty()) {
+                        int v = q.front();
+                        q.pop();
+                        for (int u : adj[v]) {
+                            if (side[u] == -1) {
+                                side[u] = side[v] ^ 1;
+                                q.push(u);
+                            } else {
+                                is_bipartite &= side[u] != side[v];
+                            }
+                        }
+                    }
+                }
+            }
+            
+            cout << (is_bipartite ? "YES" : "NO") << endl;
+        </pre>
+        
+
 </body>
 </html>
